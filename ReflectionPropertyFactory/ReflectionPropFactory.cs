@@ -14,7 +14,7 @@ namespace ReflectionPropertyFactory
         /// <param name="typeName"></param>
         /// <param name="propertyDict"></param>
         /// <returns></returns>
-        public static object CreateNewType(string typeName, Dictionary<string, Type> propertyDict, out Type reflectType)
+        public static object CreateNewObject(string typeName, Dictionary<string, Type> propertyDict, out Type reflectType)
         {
             AssemblyName aname = new AssemblyName(typeName + "Assembly");
             AssemblyBuilder assemBuilder = AssemblyBuilder.DefineDynamicAssembly(aname, AssemblyBuilderAccess.Run);
@@ -30,6 +30,21 @@ namespace ReflectionPropertyFactory
             object? o = Activator.CreateInstance(reflectType);
 
             return o;
+        }
+
+        public static Type CreateReflectType(string typeName, Dictionary<string, Type> propertyDict)
+        {
+            AssemblyName aname = new AssemblyName(typeName + "Assembly");
+            AssemblyBuilder assemBuilder = AssemblyBuilder.DefineDynamicAssembly(aname, AssemblyBuilderAccess.Run);
+            ModuleBuilder modBuilder = assemBuilder.DefineDynamicModule(typeName + "Module");
+            TypeBuilder tb = modBuilder.DefineType(typeName + "Type", TypeAttributes.Public);
+
+            foreach (var kvp in propertyDict)
+            {
+                AddProperty(ref tb, kvp);
+            }
+
+            return tb.CreateType();
         }
 
         private static void AddProperty(ref TypeBuilder tb, KeyValuePair<string, Type> kvp)

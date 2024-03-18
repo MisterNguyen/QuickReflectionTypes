@@ -16,7 +16,7 @@ namespace TestReflectionPropertyFactory
         public void TestCreateIntProperties()
         {
             var dict = TestDataHelper.CreateIntProperties();
-            object o = ReflectionPropFactory.CreateNewType("TestReflectionEmit", dict, out Type newType);
+            object o = ReflectionPropFactory.CreateNewObject("TestReflectionEmit", dict, out Type newType);
             int num = 10;
             Dictionary<string, int> valueTracker = new Dictionary<string, int>();
 
@@ -49,7 +49,7 @@ namespace TestReflectionPropertyFactory
         public void TestCreateStringProperties()
         {
             var dict = TestDataHelper.CreateStringProperties();
-            object o = ReflectionPropFactory.CreateNewType("TestReflectionEmit", dict, out Type newType);
+            object o = ReflectionPropFactory.CreateNewObject("TestReflectionEmit", dict, out Type newType);
             int num = 1;
             Dictionary<string, string> valueTracker = new Dictionary<string, string>();
             string text = "testing ";
@@ -84,7 +84,7 @@ namespace TestReflectionPropertyFactory
         public void TestCreateDoubleProperties()
         {
             var dict = TestDataHelper.CreateDoubleProperties();
-            object o = ReflectionPropFactory.CreateNewType("TestReflectionEmit", dict, out Type newType);
+            object o = ReflectionPropFactory.CreateNewObject("TestReflectionEmit", dict, out Type newType);
             double num = 10;
             Dictionary<string, double> valueTracker = new Dictionary<string, double>();
 
@@ -116,7 +116,7 @@ namespace TestReflectionPropertyFactory
         public void TestCreateMixedTypeProperties()
         {
             var dict = TestDataHelper.CreateMixedProperties();
-            object o = ReflectionPropFactory.CreateNewType("TestReflectionEmit", dict, out Type newType);
+            object o = ReflectionPropFactory.CreateNewObject("TestReflectionEmit", dict, out Type newType);
             int num = 10;
             Dictionary<string, object> valueTracker = new Dictionary<string, object>();
 
